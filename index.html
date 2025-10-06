@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background: #444;
+            padding: 10px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+        }
+        nav a:hover {
+            background: #666;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .artist {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+        }
+        .artist img {
+            width: 100%;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Famous Painters & Their Art</h1>
+    </header>
+    <nav>
+        <a href="#gallery">Gallery</a>
+        <a href="#history">Art History</a>
+        <a href="#techniques">Techniques</a>
+    </nav>
+    <div class="container">
+        <section id="gallery">
+            <h2>Featured Artists</h2>
+            <div class="gallery">
+                <div class="artist">
+                    <img src="monalisa.jpg" alt="Mona Lisa">
+                    <h3>Leonardo da Vinci</h3>
+                    <p>Known for the Mona Lisa and The Last Supper, Da Vinci was a true Renaissance genius.</p>
+                </div>
+                <div class="artist">
+                    <img src="starrynight.jpg" alt="Starry Night">
+                    <h3>Vincent van Gogh</h3>
+                    <p>Post-impressionist painter famous for Starry Night and expressive brushwork.</p>
+                </div>
+            </div>
+        </section>
+        <section id="history">
+            <h2>Art History</h2>
+            <p>Learn about different art movements, from Renaissance to Modern Art.</p>
+        </section>
+        <section id="techniques">
+            <h2>Art Techniques</h2>
+            <p>Discover how artists use color, texture, and composition to create masterpieces.</p>
+        </section>
+    </div>
+</body>
+</html>

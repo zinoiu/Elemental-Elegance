@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elemental Elegance</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif, Helvetica, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            background-color: #222;
+            color: white;
+            padding: 20px;
+            text-align: left;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        nav {
+            background: #4d5151;
+            padding: 15px;
+            text-align: right;
+        }
+        nav a {
+            color: white;
+            margin: 0 20px;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #ffcc00;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            width: 90%;
+            margin-top: 20px;
+        }
+        .gallery-item {
+            border-radius: 10px;
+            background: rgb(207, 198, 198);
+            padding: 15px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+        .gallery-item img:hover {
+            transform: scale(1.05);
+        }
+        .button {
+            display: inline-block;
+            width: 80%;
+            margin: 10px auto;
+            text-align: center;
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 20px;
+            transition: background 0.3s;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #ffcc00;
+            color: #333;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+        }
+        .modal-content {
+            background-color: white;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            max-width: 500px;
+            height: auto;
+            max-height: 80vh;
+            overflow-y: auto;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 3px 3px 15px rgba(0,0,0,0.2);
+            padding: 20px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        footer {
+            margin-top: 30px;
+            background-color: #222;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 20px;
+        }
+        @media (max-width: 768px) {
+            header {
+                text-align: center;
+                font-size: 24px;
+            }
+            nav {
+                text-align: center;
+            }
+            nav a {
+                display: block;
+                margin: 10px 0;
+            }
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            .gallery-item {
+                min-height: 300px;
+            }
+            .modal-content {
+                width: 90vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="c:\Users\DaleDoy\Downloads\2558c0d0-a7e9-4c87-996b-5f4d634087e1-removebg-preview.png" width="50" height="40" alt="image"/> ELEMENTAL ELEGANCE
+    </header>
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="gallery.html" target="_blank">Gallery</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+    <div class="container"></div>
+        <input type="text" id="searchBar" placeholder="Search for paintings..." style="width: 80%; padding: 10px; margin: 20px auto; font-size: 18px; border-radius: 5px; border: 1px solid #ccc; display: block;">
+    </div>
+    <script>
+        const searchBar = document.getElementById('searchBar');
+        searchBar.addEventListener('keyup', function() {
+            const searchTerm = searchBar.value.toLowerCase();
+            const galleryItems = document.getElementsByClassName('gallery-item');
+            Array.from(galleryItems).forEach(function(item) {
+                const title = item.getElementsByTagName('h3')[0].innerText.toLowerCase();
+                const artist = item.getElementsByTagName('p')[0].innerText.toLowerCase();
+                if (title.includes(searchTerm) || artist.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    </script>
+    <div class="container">
+        <div class="gallery" id="gallery"></div>
+    </div>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-title"></h2>
+            <img id="modal-image" src="" alt="" style="width:100%; border-radius:10px;">
+            <p id="modal-description"></p>
+        </div>
+    </div>
+    <footer>
+        Gawa ng kupal | 2025
+    </footer>
+    <script>
+        const paintings = [
+            { title: "The Persistence of Memory", artist: "Salvador Dalí", image: "https://www.singulart.com/blog/wp-content/uploads/2019/08/the-persistence-of-memory-1931.jpg", desc: "A surreal painting with melting clocks." },
+            { title: "The Birth of Venus", artist: "Sandro Botticelli", image: "https://www.visituffizi.org/img/artworks/botticelli-birth-venus.jpg", desc: "A masterpiece depicting the goddess Venus emerging from the sea." },
+            { title: "American Gothic", artist: "Grant Wood", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Grant_Wood_-_American_Gothic_-_Google_Art_Project.jpg/800px-Grant_Wood_-_American_Gothic_-_Google_Art_Project.jpg", desc: "A famous painting of a farmer and his daughter." },
+            { title: "The Night Watch", artist: "Rembrandt", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/The_Night_Watch_-_HD.jpg/1200px-The_Night_Watch_-_HD.jpg", desc: "A large painting depicting a city guard moving out." },
+            { title: "The Kiss", artist: "Gustav Klimt", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/The_Kiss_-_Gustav_Klimt_-_Google_Cultural_Institute.jpg/800px-The_Kiss_-_Gustav_Klimt_-_Google_Cultural_Institute.jpg", desc: "A symbolist painting representing a couple embracing." },
+            { title: "Mona Lisa", artist: "Leonardo da Vinci", image: "https://media-cldnry.s-nbcnews.com/image/upload/t_fit-1500w,f_auto,q_auto:best/newscms/2014_18/409941/140430-mona-lisa-mn-741.jpg", desc: "A famous portrait known for its mysterious smile." },
+            { title: "Starry Night", artist: "Vincent van Gogh", image: "https://www.vangoghstudio.com//Files/6/102000/102147/ProductPhotos/Source/2024251794.jpg", desc: "A swirling depiction of the night sky." },
+            { title: "The Last Supper", artist: "Leonardo Da Vinci", image: "https://freechristimages.com/images-Christ-life/TheLastSupperDaVinci.jpg", desc: "A depiction of Jesus' last meal with his disciples." },
+            { title: "The Scream", artist: "Edvard Munch", image: "https://tse3.mm.bing.net/th?id=OIP.PsBPkuc3sGzDJNPOLslH6AHaJU&pid=Api&P=0&h=220", desc: "An iconic expressionist artwork symbolizing anxiety." },
+            { title: "Girl with a Pearl Earring", artist: "Johannes Vermeer", image: "https://th.bing.com/th/id/OIP.qTuiyinxRpIGsJBsqx_8JwHaJG?w=149&h=183&c=7&r=0&o=5&dpr=1.5&pid=1.7", desc: "A captivating portrait with a mysterious gaze." },
+            { title: "Whistler's Mother", artist: "James McNeill Whistler", image: "https://lh3.googleusercontent.com/Q5liN0CK9lBXJtohLFKr5-eBxnDgJXjycveRcB1r49JrAqMxlK0bvTd83WOANJXzYYY=s1200", desc: "A powerful painting of the artist's mother." },
+            { title: "The Creation Of Adam", artist: "Michelangelo", image: "https://vaticantips.com/wp-content/uploads/2021/11/creation-of-adam.jpg", desc: "A dramatic scene from the Sistine Chapel ceiling depicting the creation of man." },
+            { title: "Guernica", artist: "Pablo Picasso", image: "https://upload.wikimedia.org/wikipedia/en/7/74/PicassoGuernica.jpg", desc: "A powerful anti-war painting in black and white." },
+            { title: "The Arnolfini Portrait", artist: "Jan van Eyck", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/The_Arnolfini_portrait_%281434%29.jpg/1200px-The_Arnolfini_portrait_%281434%29.jpg", desc: "A detailed portrait of a wealthy couple." },
+            { title: "The Garden of Earthly Delights", artist: "Hieronymus Bosch", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/The_Garden_of_earthly_delights.jpg/530px-The_Garden_of_earthly_delights.jpg", desc: "A triptych depicting paradise, earthly delights, and hell." }
+        ];
+
+        const gallery = document.getElementById('gallery');
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalImage = document.getElementById('modal-image');
+        const modalDescription = document.getElementById('modal-description');
+        const closeModal = document.getElementsByClassName('close')[0];
+
+        paintings.forEach(painting => {
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+            item.innerHTML = `
+                <img src="${painting.image}" alt="${painting.title}">
+                <h3>${painting.title}</h3>
+                <p>${painting.artist}</p>
+                <button class="button" onclick="openModal('${painting.title}', '${painting.image}', '${painting.desc}')">View Details</button>
+            `;
+            gallery.appendChild(item);
+        });
+
+        function openModal(title, image, description) {
+            modalTitle.innerText = title;
+            modalImage.src = image;
+            modalDescription.innerText = description;
+            modal.style.display = 'block';
+        }
+
+        closeModal.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
